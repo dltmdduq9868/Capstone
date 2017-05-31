@@ -16,6 +16,7 @@ public class Spider {
 		// we keep looping through the list of pagesToVisit and returning the next URL.
 		while(this.pagesVisited.contains(nextUrl));
 		this.pagesVisited.add(nextUrl);
+		
 		return nextUrl;
 		
 	}
@@ -23,6 +24,7 @@ public class Spider {
 	public void search(String url, String searchWord){
 		while(this.pagesVisited.size() < MAX_PAGES_TO_SEARCH){
 			String currentUrl;
+			String nextUrl;
 			SpiderLeg leg = new SpiderLeg();
 			if(this.pagesToVisited.isEmpty()){
 				currentUrl = url;
@@ -36,6 +38,9 @@ public class Spider {
 			boolean success = leg.searchForWord(searchWord);
 			if(success){
 				System.out.println(String.format("**Success** Word %s found at %s", searchWord, currentUrl));
+				nextUrl = nextUrl();
+				System.out.print("nextUrl list : " + nextUrl);
+				
                 break;
 			}
 			this.pagesToVisited.addAll(leg.getLinks());

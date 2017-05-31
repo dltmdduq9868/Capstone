@@ -11,11 +11,13 @@ public class SpiderTest
     {
     	String item;
     	final String naverURL = "http://shopping.naver.com/search/all.nhn?where=all&frm=NVSCTAB&query=";
+    	//http://shopping.naver.com/search/all.nhn?where=all&frm=NVSCTAB&query=
     	Scanner scan = new Scanner(System.in);
-    	System.out.print("¿øÇÏ´Â ¾ÆÀÌÅÛ ÀÔ·Â ");
-    	item = scan.nextLine();
-    	String queryURL = naverURL+item;
+    	//System.out.print("ì›í•˜ëŠ” ìƒí’ˆì„ ì…ë ¥í•˜ì„¸ìš”");
+    	//item = scan.nextLine();
+    	String queryURL = naverURL+"ê°€ìŠµê¸°";
         Spider spider = new Spider();
-        spider.search(queryURL, item);
+        spider.search(queryURL,"ê°€ìŠµê¸°");
+        
     }
 }

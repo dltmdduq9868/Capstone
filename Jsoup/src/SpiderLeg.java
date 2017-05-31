@@ -16,7 +16,7 @@ public class SpiderLeg {
 	// This is our web page, or in other words, our document
 	private Document htmlDocument;  
 	
-	//a[href]¸¦ ÀÌ¿ëÇÏ¿© urlÆäÀÌÁö¸¦ ÁöÁ¤ÇÏ°í »ç¿ëÀÚ url¸¦ Ãß°¡ÇÑ´Ù.
+	
 	//Give it a URL and it makes an HTTP request for a web page
 	public boolean crawl(String url){
 		try{
@@ -24,46 +24,46 @@ public class SpiderLeg {
 			Document htmlDocument = connection.get();
 			this.htmlDocument = htmlDocument;
 			
-			Document doc = Jsoup.connect(url).get();//Á¦Ç° Å¸ÀÌÆ²
+			Document doc = Jsoup.connect(url).get();
 			
-			//ÁöÁ¤ÇÑ url¿¡¼­ selectÇÏ¿© ¿øÇÏ´Â µ¥ÀÌÅÍ¸¸ ÃßÃâÇÑ´Ù. Âü°í·Î div.atc´Â
+			
 			Elements list = doc.select("li._model_list div.info a.tit");
 			
-			String BasicHref = "http://shopping.naver.com";
+			//String BasicHref = "http://pc.shopping2.naver.com/home/p/index.nhn";
+			
 			String reviewURL = null;
-
+			String ReplaceRev;
 			
 			
 			
 			
-			for(Element e: list){
-				 
-				 System.out.println("¸ğµ¨¸í : " + e.text());
+			
+			for(Element e: list){//ìƒí’ˆ ëª©ë¡ë³„ë¡œ urlê³¼ ëŒ“ê¸€ ìˆ˜ì§‘
+				 //ìƒí’ˆëª…ì„ ì¶œë ¥í•œë‹¤.
+				 System.out.println("ìƒí’ˆëª… : " + e.text());
 				 System.out.println();
 				 String href = e.toString();
-				 int indexOfFirst = href.indexOf("/detail");
+				 int indexOfFirst = 9; //href.indexOf("http");
 				 int indexOfLast = href.indexOf("target");
-				 System.out.println("URL : " + BasicHref+href.substring(indexOfFirst,indexOfLast-2));
+				 System.out.println("URL : " + /*BasicHref+*/href/*.substring(indexOfFirst,indexOfLast)*/);
 				 System.out.println();
-				 reviewURL = BasicHref+href.substring(indexOfFirst,indexOfLast);
-				 Document reviewDoc = Jsoup.connect(reviewURL).get();//Á¦Ç° ¸®ºä
-				 Elements review_detail = reviewDoc.select("ul.lst_review div.atc_area div.atc");
+				 reviewURL = href.substring(indexOfFirst,indexOfLast);
+				 
+				 ReplaceRev = reviewURL.replace('"', ' ');
+				 
+				 
+				 
+				 Document reviewDoc = Jsoup.connect(ReplaceRev).get();	
+				 Elements review_detail = reviewDoc.select("div.atc_area");
 					//ul._review_list  div.atc_area div.atc
-					
+					//div.atc_area
 					for(Element l : review_detail){
 						System.out.println(l.text());	
 					}
-					
 					System.out.println();	
 				
 			}
-			
-			
-			
-			
-
-			
-		      if(connection.response().statusCode() == 200){ // 200 is the HTTP OK status code indicating that everything is great.
+			if(connection.response().statusCode() == 200){ // 200 is the HTTP OK status code indicating that everything is great.
 				System.out.println("\n**Visiting** Received web page at " + url);
 				
 			}
@@ -78,7 +78,11 @@ public class SpiderLeg {
 		
 		//Element is A HTML element consists of a tag name, attributes, and child nodes 
 		//From an Element, you can extract data, traverse the node graph, and manipulate the HTML.
-		System.out.println("Found (" + linksOnPage.size() + ") links");
+		//System.out.println("Found (" + linksOnPage.size() + ") links");
+		//System.out.println("linksOnPage list : "+linksOnPage);
+//		for(Element l : linksOnPage){
+//			System.out.println(l.text());	
+//		}
 		
 		
 		for(Element link : linksOnPage){
