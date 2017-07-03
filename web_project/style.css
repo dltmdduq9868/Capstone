@@ -1,0 +1,47 @@
+@CHARSET "EUC-KR";
+
+header{
+  text-align: center; 
+  
+   
+}
+nav {
+
+  text-align: center; 
+   
+}
+
+h2{
+  font-size:50px;
+}
+
+.mono_table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border: none;
+    color: #000;
+}
+
+.mono_table th {
+    
+	padding: 15px;
+    background: url(http://nanati.me/img/monoptn.gif);
+    border: none;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    
+}
+.image_width { 
+	width: 100px; 
+	height: auto;
+	}
+.mono_table td {
+    
+    padding: 15px;
+    border: none;
+    border-bottom: 1px solid #000;
+    text-align: left;
+    vertical-align: baseline;
+}
